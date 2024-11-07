@@ -5,9 +5,12 @@ import java.time.Month;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Scanner;
 
 public class Funciones {
+	private static final Temporal ld1 = null;
+	private static final Temporal cumpleEsteAño = null;
 	public static LocalDate dimeFecha(String Texto, Scanner sc) {
 
 		DateTimeFormatter formato1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -65,15 +68,23 @@ public class Funciones {
 		int años = p.getYears();
 		long dias = p.getDays();
 		int meses = p.getMonths();
-		return ("Días: " + dias + " Meses: " + meses + " Años: " + años);
+		return ("Días: " + dias + ", Meses: " + meses + " , Años: " + años);
 
 	}
 
 	public static int proxCumpleaños(LocalDate fecha) {
 		LocalDate ld1 = LocalDate.now();
 
-		LocalDate cumple = LocalDate.of(ld1.getYear(), fecha.getMonth(), fecha.getDayOfMonth());
-		int dias= (int) ChronoUnit.DAYS.between(cumple, ld1);
+		LocalDate cumpleEsteAño = LocalDate.of(ld1.getYear(), fecha.getMonthValue(), fecha.getDayOfMonth());
+		if(cumpleEsteAño.isAfter(ld1)){
+			System.out.println("Futuro");
+		}
+		else {
+			cumpleEsteAño=cumpleEsteAño.plusYears(1);
+			System.out.println("Pasado");
+		}
+	
+		int dias= (int) ChronoUnit.DAYS.between(ld1, cumpleEsteAño);
 		return Math.abs(dias);
 		
 	}
