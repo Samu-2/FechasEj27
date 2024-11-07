@@ -61,7 +61,7 @@ public class Funciones {
 
 		} while (true);
 	}
-
+//
 	public static String edadCompleta(LocalDate fecha) {
 		LocalDate ld1 = LocalDate.now();
 		Period p = Period.between(fecha, ld1);
